@@ -3,25 +3,23 @@ body{
     background-color: #bff2f1;
 }
 
-#login{
-    border: 1px solid black;
+#quest{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 50%;
-}
-
-p{
-    color: red;
-    text-align: center;
+    margin-top: 0;
 }
 
 h1,h3{
     text-align: center;
-    color: black
+    color: black;
 }
 
+h1{
+    margin-top: 0;
+}
 h3{
+    margin: 0;
     margin-bottom: 5px;
 }
 
@@ -37,8 +35,8 @@ input{
     color: black;
 }
 
-#send{
-    margin: 10px 25%;
+button{
+    margin: 5px 25%;
     width: 50%;
     height: 10%;
     color: white;

@@ -1,46 +1,64 @@
 let users = {
-    1 : {"user" : "Pau","pass" : "1234"},
-    2 : {"user" : "admin","pass" : "admin"}
+    "Pau": {"email":"priusnori03@gmail.com","password":"1234"},
+    "admin": {"email":"admin@gmail.com","password":"admin"}
 }
 
-let sendButton = document.getElementById("send");
+let loginButton = document.getElementById("loginButton");
+let registerButton = document.getElementById("registerButton");
 
-sendButton.onclick = function() {
-    let userName = document.getElementById("username");
-    let userPass = document.getElementById("password");
-
-    let wrongText = document.getElementById("wrongText");
+loginButton.onclick = function() {
+    let userName = document.getElementById("lo-username").value;
+    let userPass = document.getElementById("lo-password").value;
 
     let correctName = false;
     let correctPass = false;
 
-    for(let i = 1; i < Object.keys(users).length; i++){
-        if(userName.value == users[i]["user"]){
-            correctName = true;
-            if(userPass.value == users[i]["pass"]){
-                correctPass = true;
-                break;
+    if(userName in users){
+        correctName = true;
+        if(users[userName]["password"] == userPass){
+            correctPass = true;
+        }
+    }
+    if(userName == "" || userPass == ""){
+        alert("Complete all the fields to login")
+    }else if( correctName && correctPass){
+        alert("login done")
+    }else if (correctName && !correctPass){
+        alert("Wrong User or Password")
+    }else{
+        alert("user not registered")
+    }
+}
+
+registerButton.onclick = function() {
+    let userName = document.getElementById("re-username").value;
+    let userPass = document.getElementById("re-password").value;
+    let userEmail = document.getElementById("re-email").value;
+
+    let userExist = false;
+    let emailExist = false;
+
+    if(userName in users){
+        userExist = true;
+    }else{
+        for(let i in users){
+            if(users[i]["email"] === userEmail){
+                emailExist = true;
+                break
             }
         }
     }
 
-    if( correctName && correctPass){
-        alert("login done")
-    }else if (correctName && !correctPass){
-        userName.style.border = "1px solid red";
-        userPass.style.border = "1px solid red";
+    if(userName == "" || userPass == "" || userEmail == ""){
+        alert("La resolución de tu pantalla es: " + screen.width + " x " + screen.height) 
 
-        if(wrongText == null){
-            let newElement = document.createElement("p");
-            let text = document.createTextNode("Wrong User or Password !");
-            newElement.appendChild(text);
-            newElement.setAttribute("id","wrongText")
-
-            var div = document.getElementsByTagName("div")[0];
-            div.appendChild(newElement);
-        }
-
+        alert("Complete all the fields to register")
+    }else if(userExist){
+        alert("The username is already registered");
+    }else if(emailExist){
+        alert("The email is already registered");
     }else{
-        alert("user not registered")
+        users[userName] = {"email": userEmail, "password":userPass};
+        alert("Registered user");
     }
 }
